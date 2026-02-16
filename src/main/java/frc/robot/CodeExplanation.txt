@@ -1,0 +1,72 @@
+FRC 2026 Shooter Robot Code Explanation
+=======================================
+
+1. Project Overview
+-------------------
+This project is a Command-Based WPILib robot program designed to control a flywheel shooter mechanism. It demonstrates:
+- Hardware abstraction using Subsystems.
+- Action logic using Commands.
+- REVLib 2026 Spark MAX control and configuration.
+- Debouncing for the limit switch.
+
+2. Architecture Breakdown
+-------------------------
+
+A. RobotContainer (The Binder)
+   - Location: src/main/java/frc/robot/RobotContainer.java
+   - Function: Instantiates subsystems and operator interface devices, then maps buttons to commands.
+   - It does not contain periodic logic; it only declares bindings.
+   - Operator Xbox and keypad bindings are enabled via Constants.OI flags.
+
+B. ShooterSubsystem (The Hardware Owner)
+   - Location: src/main/java/frc/robot/subsystems/ShooterSubsystem.java
+   - Owns the shooter motors and limit switch.
+   - Exposes simple methods so commands do not touch hardware directly.
+
+C. Commands (The Actions)
+   - Location: src/main/java/frc/robot/commands/
+   - SetShooterRpm: One-shot RPM setpoint.
+   - StopShooter: One-shot stop.
+   - RunShooterUntilStopped: Runs until interrupted.
+   - SetShooterRpmByDistance: Uses distance lookup (RPM or Voltage).
+   - RunFeederManual: Feeder runs while scheduled.
+   - RunFeederWhenAtSpeed: Feeder runs only when isAtSpeed() is true.
+
+3. Button Bindings (Summary)
+----------------------------
+Operator Xbox (USB port 1 by default):
+- A: Low RPM
+- B: Mid RPM
+- Y: High RPM (runs until interrupted)
+- X: Stop shooter
+- Left Bumper: Manual feed (hold)
+- Right Bumper: Gated feed (hold, only at speed)
+- D-pad Up/Left/Right: Distance RPM (Far/Mid/Near)
+- Start/Back/Right Stick: Distance Voltage (Far/Mid/Near)
+- D-pad Down/Left Trigger/Right Trigger: Distance RPM interpolated (Mid/Near/Far)
+
+Keypad (USB port 1 by default):
+- Testing layout exposes multiple shooting methods.
+- Planned competition layout is documented in RobotContainer comments.
+
+4. Control Logic Highlights
+---------------------------
+- Closed-loop RPM control uses Spark MAX PID + feedforward.
+- Open-loop voltage mode is available for testing and comparison.
+- isAtSpeed() is used to gate feeder operation.
+
+5. Hardware Map
+---------------
+- CAN ID 27: Leader Motor (Spark MAX)
+- CAN ID 23: Follower Motor (Spark MAX)
+- CAN ID 28: Feed Motor (Spark MAX)
+- DIO Port 0: Limit Switch
+- USB Port 0: Driver Xbox (always present)
+- USB Port 1: Operator Xbox or Keypad (configurable)
+
+6. Autonomous
+-------------
+RobotContainer.getAutonomousCommand() returns:
+  new PrintCommand("No autonomous command configured")
+
+There is no autonomous behavior yet.

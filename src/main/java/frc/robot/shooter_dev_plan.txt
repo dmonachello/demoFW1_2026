@@ -1,0 +1,36 @@
+Shooter Development Plan (Staged, Testable)
+
+Stage 1: Open-Loop Flywheel (Complete)
+- Shooter subsystem runs motors in open-loop.
+- Basic stop command.
+
+Stage 2: Basic Telemetry (Complete)
+- Encoder RPM values published to SmartDashboard.
+
+Stage 3: Closed-Loop Velocity Control (Complete)
+- Spark MAX closed-loop PID + feedforward.
+- RPM setpoints with clamping to kMaxRpm_Motor.
+
+Stage 4: Readiness Check (Complete)
+- isAtSpeed() with tolerance (kRpmTolerance).
+- "Shooter Ready" SmartDashboard indicator.
+
+Stage 5: Feeder Integration (Complete)
+- Manual feed command.
+- Gated feed command (only when at speed).
+
+Stage 6: Distance Mapping (Complete)
+- Nearest lookup and interpolated lookup for distance presets.
+- Both RPM (closed-loop) and voltage (open-loop) modes.
+
+Stage 7: Testing Layout vs Competition Layout (In Progress)
+- Testing keypad exposes multiple algorithms.
+- Competition layout will collapse to one chosen method.
+
+Stage 8: Intake + Climber Integration (Planned)
+- Add intake raise/lower and forward/reverse commands.
+- Add climber up/down commands with limit safety.
+
+Stage 9: Calibration & Tuning (Planned)
+- Gather distance-to-RPM data.
+- Tune kP/kFF and verify shot consistency.

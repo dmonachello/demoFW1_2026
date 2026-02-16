@@ -1,0 +1,70 @@
+Shooter System Test Procedure (Leader/Follower)
+
+Before You Start
+- Put the robot on blocks or remove game pieces if the shooter could interact with the field.
+- No game pieces loaded for the first half of the tests.
+- Confirm CAN IDs match Constants.Shooter.kLeaderId, kFollowerId, and kFeedId.
+- Confirm breaker sizes and wiring are correct.
+- Confirm OI selection flags in Constants.OI (operator Xbox and/or keypad).
+
+1) Power-On & CAN Sanity
+- Power the robot.
+- Open Driver Station + SmartDashboard.
+- Spin the flywheel by hand and confirm RPM changes on:
+  - "Shooter Leader RPM"
+  - "Shooter Follower RPM"
+Pass criteria: RPM values update for both motors.
+
+2) Direction Check (Low RPM)
+- Press A (low RPM) on the operator Xbox.
+- Observe motor direction.
+- Stop with X if needed.
+Pass criteria: Flywheel spins in the expected direction and both motors spin the same way.
+If motors fight: Toggle Constants.Shooter.kFollowerInverted.
+If direction is wrong: check inversion settings in ShooterSubsystem config.
+
+3) Follower Verification
+- Press A (low RPM).
+- Compare leader RPM vs follower RPM on dashboard.
+Pass criteria: Follower RPM closely tracks leader RPM.
+
+4) Closed-Loop Tracking (No Game Piece)
+- Press A (low), B (mid), Y (high).
+- Observe time-to-speed, overshoot, and stability.
+Pass criteria: Reaches target quickly and settles within tolerance without oscillation.
+
+5) At-Speed Indicator
+- Use A/B/Y and watch "Shooter Ready".
+Pass criteria: "Shooter Ready" becomes true when RPM is within tolerance.
+
+6) Feeders (Manual vs Gated)
+- With shooter at speed:
+  - Press Right Bumper (gated feed). It should run only when "Shooter Ready" is true.
+  - Press Left Bumper (manual feed). It should run regardless of readiness.
+Pass criteria: Gated feed stops when not at speed; manual feed always runs while held.
+
+7) Distance RPM Presets (Nearest Lookup)
+- D-pad Up/Left/Right set Far/Mid/Near (RPM mode).
+Pass criteria: "Shooter Target RPM" changes to the preset.
+
+8) Distance Voltage Presets (Open Loop)
+- Start/Back/Right Stick set Far/Mid/Near (Voltage mode).
+Pass criteria: "Shooter Target Voltage" changes to the preset.
+
+9) Distance RPM Presets (Interpolated)
+- D-pad Down/Left Trigger/Right Trigger set Mid/Near/Far (Interpolated RPM).
+Pass criteria: "Shooter Target RPM" changes to the interpolated value.
+
+10) Optional: With Game Piece
+- Load one game piece.
+- Spin to target RPM.
+- Press Right Bumper to feed when ready.
+- Observe RPM dip and recovery.
+Pass criteria: RPM recovers quickly and consistently.
+
+What to Record
+- Time to reach setpoint (low/mid/high)
+- Overshoot and oscillation
+- At-speed stability ("Shooter Ready")
+- Follower mismatch, if any
+- Gated feed behavior (only feeds at speed)
