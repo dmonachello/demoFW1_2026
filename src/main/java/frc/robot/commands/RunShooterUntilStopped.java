@@ -4,6 +4,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
+/*
+Runs the shooter at a target RPM until interrupted.
+Used for "hold to run" or persistent shooter spin.
+
+Current bindings (RobotContainer):
+1. onTrue (one-shot start binding used for persistent run).
+
+Binding impact:
+1. onTrue means it starts on press and runs until another shooter command interrupts,
+2. if bound with whileTrue in the future, it would stop on button release.
+*/
 public class RunShooterUntilStopped extends Command {
   // This command keeps the shooter running until it is interrupted/canceled.
   // Scheduler basics for students:

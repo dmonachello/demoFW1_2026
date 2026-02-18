@@ -22,6 +22,16 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
  * 4. Type Safety: final prevents accidental modification
  * 5. Organization: Inner classes group related constants
  */
+/*
+This file is the single source of truth for tunable robot values.
+It groups constants by subsystem to make tuning and hardware changes
+predictable and easy to review.
+
+Constants overview:
+1. centralizes CAN IDs, setpoints, and limits,
+2. reduces magic numbers across the codebase,
+3. makes tuning changes safe and traceable.
+*/
 public final class Constants {
   /**
    * Private constructor prevents instantiation.

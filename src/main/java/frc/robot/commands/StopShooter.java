@@ -7,6 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
+/*
+One-shot command that stops the shooter subsystem.
+Used to cancel any shooter activity immediately.
+
+Current bindings (RobotContainer):
+1. onTrue (one-shot stop binding used in multiple places).
+
+Binding impact:
+1. onTrue means it stops once and ends immediately,
+2. if bound with whileTrue in the future, it would keep reissuing stop.
+*/
 public class StopShooter extends Command {
   // This command stops the shooter one time and then ends.
   // Command-based: this command "requires" the shooter subsystem while scheduled.

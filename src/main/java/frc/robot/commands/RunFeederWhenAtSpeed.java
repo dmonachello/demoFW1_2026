@@ -3,11 +3,22 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
-/**
- * Runs the feeder motor only when the shooter flywheel is at speed.
- * Intended for gated feed control (e.g., while a button is held).
- */
+/*
+Gated feeder control based on shooter readiness.
+It only feeds when the shooter is at speed.
+
+Current bindings (RobotContainer):
+1. whileTrue (held-run binding used in multiple places).
+
+Binding impact:
+1. whileTrue means this command runs only while the button is held,
+2. if bound with onTrue in the future, it would run indefinitely until interrupted.
+*/
 public class RunFeederWhenAtSpeed extends Command {
+  /*
+   * Runs the feeder motor only when the shooter flywheel is at speed.
+   * Intended for gated feed control (e.g., while a button is held).
+   */
   private final ShooterSubsystem shooter;
   private final double volts;
 

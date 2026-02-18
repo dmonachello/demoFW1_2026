@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.AutoShoot;
 import frc.robot.commands.RunFeederManual;
 import frc.robot.commands.RunFeederWhenAtSpeed;
 import frc.robot.commands.RunShooterUntilStopped;
@@ -18,6 +19,19 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ShooterSubsystem.LookupMode;
 import frc.robot.subsystems.ShooterSubsystem.SetpointMode;
 
+/*
+Wires together subsystems, commands, and operator controls.
+It defines button bindings and exposes the selected autonomous command.
+
+Container responsibilities:
+1. construct subsystems and input devices,
+2. bind controls to commands,
+3. supply the autonomous command.
+
+Command style note:
+1. use initialize() for one-shot commands that set a target and end,
+2. use execute() for continuous commands that must run every cycle.
+*/
 public class RobotContainer {
   // CommandScheduler 101 (student version):
   // - Runs every 20 ms and decides which commands are active.
@@ -53,8 +67,8 @@ public class RobotContainer {
       configureKeypadBindings();
     }
 
-    // Example: run shooter until the upper limit switch is triggered.
-    // panel.button(4).onTrue(
+    // Example: run shooter until limit switch is triggered OR button is released.
+    // panel.button(4).whileTrue(
     //   new RunShooterUntilLimitSwitch(shooter, Constants.Shooter.kHighRpm));
     
 
@@ -88,9 +102,9 @@ public class RobotContainer {
     operator.rightBumper().whileTrue(
         new RunFeederWhenAtSpeed(shooter, Constants.Shooter.kFeedVoltage));
 
-    // Example command using limit switch to end it:
-    // operator.leftStick().onTrue(
-    //     new RunShooterUntilLimitSwitch(shooter, Constants.Shooter.kHighRpm));
+    // AutoShoot: spin up, then feed once at speed. Ends on button release.
+    operator.leftStick().whileTrue(
+        new AutoShoot(shooter, Constants.Shooter.kHighRpm, Constants.Shooter.kFeedVoltage));
 
     // D-pad distance presets (RPM mode).
     operator.povUp().onTrue(
@@ -251,7 +265,9 @@ public class RobotContainer {
         new RunFeederManual(shooter, Constants.Shooter.kFeedVoltage));
 
     panel.button(23).onTrue(new StopShooter(shooter));
-    // Button 24 is currently unassigned (available).
+    // Button 24: AutoShoot (hold to run).
+    panel.button(24).whileTrue(
+        new AutoShoot(shooter, Constants.Shooter.kHighRpm, Constants.Shooter.kFeedVoltage));
 
   }
 

@@ -6,6 +6,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.RobotBase;
 
+/*
+Entry point for the robot program on the roboRIO.
+It hands control to WPILib's RobotBase which manages the main loop.
+
+Startup flow:
+1. pass Robot::new to WPILib,
+2. create Robot instance,
+3. run robot lifecycle callbacks.
+*/
 public final class Main {
   // Utility class: not meant to be instantiated.
   private Main() {}

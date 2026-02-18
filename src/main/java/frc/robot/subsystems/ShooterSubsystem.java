@@ -25,17 +25,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-/**
- * ShooterSubsystem - Controls dual-motor flywheel shooter with feed motor.
- * 
- * RECENT IMPROVEMENTS (Your Updates):
- * - isAtSpeed() method - Check if shooter is ready (EXCELLENT ADDITION!)
- * - Idle mode configuration - Explicit brake/coast settings
- * - "Shooter Ready" telemetry - Dashboard shows when ready to shoot
- * 
- * (See previous comments for full hardware architecture and control modes)
- */
+/*
+Subsystem that owns the shooter hardware and control logic.
+It configures motors, manages setpoints, and publishes telemetry.
+
+Responsibilities:
+1. configure motor controllers and sensors,
+2. accept RPM/voltage setpoints and distance lookups,
+3. report status to dashboards and data logs.
+*/
 public class ShooterSubsystem extends SubsystemBase {
+  /*
+   * ShooterSubsystem - Controls dual-motor flywheel shooter with feed motor.
+   * 
+   * RECENT IMPROVEMENTS (Your Updates):
+   * - isAtSpeed() method - Check if shooter is ready (EXCELLENT ADDITION!)
+   * - Idle mode configuration - Explicit brake/coast settings
+   * - "Shooter Ready" telemetry - Dashboard shows when ready to shoot
+   * 
+   * (See previous comments for full hardware architecture and control modes)
+   */
   
   public enum SetpointMode {
     RPM,      // Closed-loop velocity control

@@ -7,6 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
+/*
+One-shot command that sets a shooter RPM target.
+It does not wait for spin-up; the subsystem handles control.
+
+Current bindings (RobotContainer):
+1. onTrue (one-shot setpoint binding used in multiple places).
+
+Binding impact:
+1. onTrue means it sets the target once and ends immediately,
+2. if bound with whileTrue in the future, it would keep reasserting the same target.
+*/
 public class SetShooterRpm extends Command {
   // This command sets a shooter speed one time and then ends.
   // Command-based: this command "requires" the shooter subsystem while scheduled.

@@ -9,6 +9,15 @@ import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+/*
+Main lifecycle class for the robot program.
+It initializes logging and the container, and drives the command scheduler.
+
+Lifecycle flow:
+1. set up logging and RobotContainer,
+2. run CommandScheduler every cycle,
+3. handle mode transitions (auto/teleop/test/disabled).
+*/
 public class Robot extends TimedRobot {
   // Holds the autonomous command selected by RobotContainer.
   private Command m_autonomousCommand;
