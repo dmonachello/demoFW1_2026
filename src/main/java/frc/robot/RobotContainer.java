@@ -20,6 +20,9 @@ import frc.robot.subsystems.ShooterSubsystem.LookupMode;
 import frc.robot.subsystems.ShooterSubsystem.SetpointMode;
 
 /*
+
+https://github.com/dmonachello/demoFW1_2026
+
 Wires together subsystems, commands, and operator controls.
 It defines button bindings and exposes the selected autonomous command.
 

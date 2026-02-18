@@ -14,6 +14,11 @@ Current bindings (RobotContainer):
 Binding impact:
 1. onTrue means it starts on press and runs until another shooter command interrupts,
 2. if bound with whileTrue in the future, it would stop on button release.
+
+Termination:
+1. ends when interrupted or canceled by another command,
+2. ends on button release when bound with whileTrue,
+3. otherwise runs until explicitly canceled.
 */
 public class RunShooterUntilStopped extends Command {
   // This command keeps the shooter running until it is interrupted/canceled.

@@ -22,6 +22,10 @@ Binding impact:
 1. onTrue means it sets the target once and ends immediately,
 2. if bound with whileTrue in the future, it would keep reissuing the target.
 
+Termination:
+1. ends immediately after initialize() (isFinished returns true),
+2. interrupts/cancels are technically possible but not meaningful.
+
 One-shot command:
 1. resolves a shooter setpoint from distance,
 2. issues the target,

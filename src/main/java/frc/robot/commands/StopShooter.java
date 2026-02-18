@@ -17,6 +17,10 @@ Current bindings (RobotContainer):
 Binding impact:
 1. onTrue means it stops once and ends immediately,
 2. if bound with whileTrue in the future, it would keep reissuing stop.
+
+Termination:
+1. ends immediately after initialize() (isFinished returns true),
+2. interrupts/cancels are technically possible but not meaningful.
 */
 public class StopShooter extends Command {
   // This command stops the shooter one time and then ends.

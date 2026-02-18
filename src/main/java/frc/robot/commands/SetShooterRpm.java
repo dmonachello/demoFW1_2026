@@ -17,6 +17,10 @@ Current bindings (RobotContainer):
 Binding impact:
 1. onTrue means it sets the target once and ends immediately,
 2. if bound with whileTrue in the future, it would keep reasserting the same target.
+
+Termination:
+1. ends immediately after initialize() (isFinished returns true),
+2. interrupts/cancels are technically possible but not meaningful.
 */
 public class SetShooterRpm extends Command {
   // This command sets a shooter speed one time and then ends.

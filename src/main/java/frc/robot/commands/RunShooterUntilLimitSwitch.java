@@ -14,6 +14,11 @@ Binding impact:
 1. when bound with onTrue, it will run until the limit switch ends it,
 2. if bound with whileTrue in the future, it would still stop on the switch,
    but also end on button release.
+
+Termination:
+1. ends when the limit switch is pressed,
+2. ends when interrupted or canceled by another command,
+3. ends on button release when bound with whileTrue.
 */
 public class RunShooterUntilLimitSwitch extends Command {
   /*

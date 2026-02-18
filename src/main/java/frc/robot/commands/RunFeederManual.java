@@ -13,6 +13,11 @@ Current bindings (RobotContainer):
 Binding impact:
 1. whileTrue means this command runs only while the button is held,
 2. if bound with onTrue in the future, it would run indefinitely until interrupted.
+
+Termination:
+1. ends when interrupted or canceled by another command,
+2. ends on button release when bound with whileTrue,
+3. otherwise runs until explicitly canceled.
 */
 public class RunFeederManual extends Command {
   /*

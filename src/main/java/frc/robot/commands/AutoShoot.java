@@ -14,6 +14,11 @@ Binding impact:
 1. with whileTrue, it will run only while held and stop on release,
 2. with onTrue, it will run until interrupted or canceled.
 
+Termination:
+1. ends when interrupted or canceled by another command,
+2. ends on button release when bound with whileTrue,
+3. otherwise runs until explicitly canceled.
+
 Behavior:
 1. set target RPM on initialize,
 2. gate the feeder in execute based on isAtSpeed(),
